@@ -1,64 +1,100 @@
-const fs = require("fs");
+const fs = require("fs")
 
 class Contenedor {
-    constructor(archivo) {
-        this.archivo = archivo;
-    }
-    async save(objeto) {
-        try {
-            let ids =Array.from(JSON.parse(await fs.promises.readFile("./ids.txt","utf-8")));
-            ids.push(ids[ids.length-1]+1);
-            objeto.id = ids[ids.length-1];
-            fs.promises.writeFile("./ids.txt", JSON.stringify(ids));
-            let arrayObjetos = JSON.parse(await fs.promises.readFile(this.archivo,"utf8"));
-            arrayObjetos.push(objeto);
-            await fs.promises.writeFile(this.archivo, JSON.stringify(arrayObjetos))
-            console.log("Objeto guardado en", this.archivo);
-        }
-        catch (error) {
-            if(error.code === 'ENDENT') {
-                objeto.id = 1;
-                await fs.promises.writeFile("./ids.txt", JSON.stringify([1]));
-                await fs.promises.writeFile(this.archivo, JSON.stringify([objeto]));
-                console.log("Error guardando objeto en el fs.Code:",error);
-            }
-        }
-    }
-    async getById(id) {
-        try {
-            const data = JSON.parse(awai fs.promises.readFile(this.archivo, "utf8"));
-            const objeto = data.find(objeto => objeto.id === id);
-            return (objeto ? console.log(objeto) : console.log("No se encontro el objeto con el id", id));
-
-        }
-        catch (error) {
-            console.log("Error buscando en el fs.code",error);
-
-        }}
-
-        async deleteAll() {
+    constructor(fileName) {
+        this.fileName = fileName
+        async function createFile() {
             try {
-                await fs.promises.writeFile(this.archivo,"")
-                console.log("Objetos eliminados")
-            } catch(error) {
-                console.log("Error eliminando objetos en el fs. code:", error)
-
+                await fs.promises.writeFile(`${fileName}`, "")
+                console.log("archivo Creado ")
+            } catch (err) {
+                console.log(`hubo un error : ${err}`)
             }
         }
+        createFile()
+    }
+ 
+    async save(obj) {
+        try {
+            let inventary = await fs.promises.readFile(`${this.fileName}`, 'utf-8')
+            console.log(inventary)
+            if (!inventary) {
+                obj.id = 1
+                const arrObjs = [obj]
+                await fs.promises.writeFile(`${this.fileName}`, JSON.stringify(arrObjs))
+                return obj.id
+            } else {
+                inventary = JSON.parse(inventary);
+                obj.id = inventary[inventary.length - 1].id + 1
+                inventary.push(obj)
+                await fs.promises.writeFile(`${this.fileName}`, JSON.stringify(inventary))
+                return obj.id
+            }
+        } catch (err) {
+            console.log(`no se pudo agregar el objeto por : ${err}`)
+        }
+    }
     
 
+    async getbyId(id) {
+        try {
+            const inventary = await fs.promises.readFile(`${this.fileName}`, "utf-8")
+            let dataParse = JSON.parse(inventary)
+            let objFind = dataParse.find(item => item.id == id)
+            if (objFind) {
+                return objFind
+            } else {
+                return null
+            }
+
+        } catch (err) {
+            console.log(`hubo un error en recuperar el objeto por id : ${err}`)
+        }
     }
-    const productos = [{
-            title:"productos1",
-            price: 200,
-            thumbnail: "url1"
-        },{
-            title:"productos2",
-            price: 300,
-            thumbnail: "url2"
-        },{
-            title:"productos3",
-            price: 400,
-            thumbnail: "url4"
-        }]
-        const archivo = new Contenedor("./productos,txt")
+    
+    async getAll() {
+        try {
+            const inventary = await fs.promises.readFile(`${this.fileName}`, "utf-8")
+            let inventaryParse = JSON.parse(inventary)
+            return inventaryParse
+        } catch (err) {
+            console.log(`hubo un error : ${err}`)
+        }
+    }
+
+   
+    async deleteById(id) {
+        try {
+            const data = await fs.promises.readFile(`${this.fileName}`, "utf-8")
+            let dataParse = JSON.parse(data)
+            let objsFind = dataParse.filter((item) => item.id != id)
+            fs.promises.writeFile(`${this.fileName}`, JSON.stringify(objsFind))
+            console.log(`objeto con id : ${id} borrado`)
+        } catch (err) {
+            console.log(`hubo un error en recuperar el objeto por id : ${err}`)
+        }
+
+    }
+   
+    async deleteAll() {
+        try {
+            await fs.promises.writeFile(`./${this.fileName}`, " ")
+            console.log("contenido Borrado")
+        } catch (err) {
+            console.log(`hubo un error : ${err}`)
+        }
+    }
+}
+
+const newFile = new Contenedor("./productos.txt")
+
+newFile.save({ title: "botin rojo", price: 4100, thumbnail: "" }).then(res => {
+    console.log(res)
+    newFile.save({ title: "botin azul", price: 3500, thumbnail: "" }).then(res => {
+        console.log(res)
+        newFile.save({ title: "botin amarillo", price: 5500, thumbnail: "" }).then(res => {
+            console.log(res)
+           
+        })
+    })
+})
