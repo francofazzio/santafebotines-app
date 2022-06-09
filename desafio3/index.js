@@ -95,9 +95,6 @@ class Contenedor{
 
 const productos = new Contenedor ("productos.txt")
 
-
-
-//---------------------------------------------------------------------*
 const express = require('express')
 const app = express()
 const puerto = 8080
