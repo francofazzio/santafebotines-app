@@ -1,1 +1,0 @@
-[{"tittle":"botin rojo","price":4100,"thumbnail":"","id":1},{"tittle":"botin azul","price":3500,"thumbnail":"","id":2},{"tittle":"botin amarillo","price":5500,"thumbnail":"","id":3}]
