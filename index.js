@@ -101,7 +101,7 @@ const app = express()
 const puerto = 8080
 
 app.get(`/`, (req , res)=>{
-    res.send("home")
+    res.send("santa fe botines")
 })
 app.get(`/productos`, (req , res)=>{
     newFile.getAll().then(i=> res.json(i))
