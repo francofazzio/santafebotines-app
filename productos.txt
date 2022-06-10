@@ -1,1 +1,1 @@
-[{"title":"producto1","price":111,"thumbnail":"8900","id":0},{"title":"producto2","price":7300,"thumbnail":"","id":1},{"title":"producto3","price":4500,"thumbnail":"","id":2}]
+[{"title":"botin rojo","price":7000,"thumbnail":"","id":1},{"title":"botin azul","price":10000,"thumbnail":"","id":2},{"title":"botin naranja","price":9000,"thumbnail":"","id":3}]

@@ -1,124 +1,119 @@
-const fs = require('fs')
+const fs = require("fs")
 
-class Contenedor{
-    constructor(nombreDeArchivo){
-        this.nombreDeArchivo=nombreDeArchivo
-    }
-    
-    save(objeto){
-        
-        let productos= []
-        const leer = async ()=>{
-            try{
-                let resultado = await fs.promises.readdir('./') 
-                let existe = resultado.find(archivo => archivo === this.nombreDeArchivo)
-                if(existe){
-                    let desdeArchivo = await fs.promises.readFile(this.nombreDeArchivo, 'utf-8')
-                    if (desdeArchivo === ''){return nuevo()}
-                    let archivoParseado = JSON.parse(desdeArchivo)
-                    productos=archivoParseado
-                    if(productos.length > 0){
-                        let ultimo = productos.length-1
-                        let objectId= productos[ultimo].id
-                        objeto.id = objectId+1
-                        }else {
-                            objeto.id = 0
-                        }
-                    productos.push(objeto)
-                    await fs.promises.writeFile(this.nombreDeArchivo, JSON.stringify(productos))
-                    return objeto.id
-                }else{
-                    return  nuevo()
-                }
-            }catch (error){
-                console.log(`hubo un error en save existente: ${error}`)
-            } 
+class Contenedor {
+    constructor(fileName) {
+        this.fileName = fileName
+        async function createFile() {
+            try {
+                await fs.promises.writeFile(`${fileName}`, "")
+                console.log("archivo Creado ")
+            } catch (err) {
+                console.log(`hubo un error : ${err}`)
+            }
         }
-        
-        const nuevo = async()=>{
-            try{
-                objeto.id = 0
-                productos.push(objeto)
-                await fs.promises.writeFile(this.nombreDeArchivo, JSON.stringify(productos))
-                return objeto.id
-            }catch (error){
-                console.log(`hubo un error en save nuevo: ${error}`)
-            } 
-            
-        }
-        
-        return  leer()
+        createFile()
     }
-
-
-    async getById(Number){
+   
+    async save(obj) {
         try {
-            let desdeArchivo = await fs.promises.readFile(this.nombreDeArchivo, 'utf-8')
-            let archivoParseado = JSON.parse(desdeArchivo)
-            let encontrado = archivoParseado.find(object =>object.id === Number)
-            if (encontrado){
-                return encontrado
-            }else{
+            let inventary = await fs.promises.readFile(`${this.fileName}`, 'utf-8')
+            console.log(inventary)
+            if (!inventary) {
+                obj.id = 1
+                const arrObjs = [obj]
+                await fs.promises.writeFile(`${this.fileName}`, JSON.stringify(arrObjs))
+                return obj.id
+            } else {
+                inventary = JSON.parse(inventary);
+                obj.id = inventary[inventary.length - 1].id + 1
+                inventary.push(obj)
+                await fs.promises.writeFile(`${this.fileName}`, JSON.stringify(inventary))
+                return obj.id
+            }
+        } catch (err) {
+            console.log(`no se pudeo agregar el objeto por : ${err}`)
+        }
+    }
+  
+
+    async getbyId(id) {
+        try {
+            const inventary = await fs.promises.readFile(`${this.fileName}`, "utf-8")
+            let dataParse = JSON.parse(inventary)
+            let objFind = dataParse.find(item => item.id == id)
+            if (objFind) {
+                return objFind
+            } else {
                 return null
             }
-        } catch(error) {
-            console.log(`Hubo un error en getById ${error}`)
-        }
-    } 
-    async getAll(){
-        try {
-            let desdeArchivo = await fs.promises.readFile(this.nombreDeArchivo, 'utf-8')
-            return JSON.parse(desdeArchivo)
-        } catch(error) {
-            console.log(`Hubo un error en getAll ${error}`)
-        }
-    } 
-    async deleteById(Number){
-        try {
-            let desdeArchivo = await fs.promises.readFile(this.nombreDeArchivo, 'utf-8')
-            let archivoParseado = JSON.parse(desdeArchivo)
-            let filtrado = archivoParseado.filter(object =>object.id !== Number)
-            await fs.promises.writeFile(this.nombreDeArchivo, JSON.stringify(filtrado))
-        } catch(error) {
-            console.log(`Hubo un error  en deleteById ${error}`)
-        }
-    } 
-    async deleteAll(Number){
-        try {
-            await fs.promises.writeFile(this.nombreDeArchivo, '')
-        } catch(error) {
-            console.log(`Hubo un error  en deleteById ${error}`)
-        }
-    } 
 
+        } catch (err) {
+            console.log(`hubo un error en recuperar el objeto por id : ${err}`)
+        }
+    }
+  
+    async getAll() {
+        try {
+            const inventary = await fs.promises.readFile(`${this.fileName}`, "utf-8")
+            let inventaryParse = JSON.parse(inventary)
+            return inventaryParse
+        } catch (err) {
+            console.log(`hubo un error : ${err}`)
+        }
+    }
+
+   
+    async deleteById(id) {
+        try {
+            const data = await fs.promises.readFile(`${this.fileName}`, "utf-8")
+            let dataParse = JSON.parse(data)
+            let objsFind = dataParse.filter((item) => item.id != id)
+            fs.promises.writeFile(`${this.fileName}`, JSON.stringify(objsFind))
+            console.log(`objeto con id : ${id} borrado`)
+        } catch (err) {
+            console.log(`hubo un error con id : ${err}`)
+        }
+
+    }
+   
+    async deleteAll() {
+        try {
+            await fs.promises.writeFile(`./${this.fileName}`, " ")
+            console.log("contenido Borrado")
+        } catch (err) {
+            console.log(`hubo un error : ${err}`)
+        }
+    }
 }
 
-const productos = new Contenedor ("productos.txt")
-const express = require('express')
+const newFile = new Contenedor("./productos.txt")
+
+async function cargarProductos (){
+    await newFile.save({ title: "botin rojo", price: 7000, thumbnail: "" })
+    await newFile.save({ title: "botin azul", price: 10000, thumbnail: "" })
+    await newFile.save({ title: "botin naranja", price: 9000, thumbnail: ""})
+}
+
+cargarProductos()
+
+const express = require("express")
 const app = express()
 const puerto = 8080
 
-
-// app.use((req,res,next)=>{
-//     productos.getAll().then((r)=>(todos=r))
-//     next()
-// })
-app.get('/productos', async (req,res)=>{
-    const respuesta = await productos.getAll()
-    console.log(respuesta)
-    res.json(respuesta)
+app.get(`/`, (req , res)=>{
+    res.send("home")
+})
+app.get(`/productos`, (req , res)=>{
+    newFile.getAll().then(i=> res.json(i))
+})
+app.get(`/productosRandom`, (req , res)=>{
+    let numAleatorio = (Math.floor(Math.random() * (4 - 0)))
+    newFile.getbyId(numAleatorio)
+    .then(i=>{ 
+        res.json(i)
+        console.log(numAleatorio)})
 })
 
-app.get('/productoRandom', (req,res)=>{
-    const numeroAleatorio =  Math.floor((Math.random() * (todos.length - 0 + 1)) + 0);
-    res.json(todos[numeroAleatorio])
-
-})
-
-
-app.listen(puerto,(error)=>{
-    if (error){
-        return console.log(`el servidor tiene un error ${error}`)
-    }
-    console.log(`el servidor se inicio en el puerto ${puerto}`)
+app.listen(puerto , ()=>{
+    console.log(`servidor escuchando puerto: ${puerto}`)
 })
