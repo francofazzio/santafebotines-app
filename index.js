@@ -94,18 +94,19 @@ class Contenedor{
 }
 
 const productos = new Contenedor ("productos.txt")
-
 const express = require('express')
 const app = express()
 const puerto = 8080
 
-let todos = []
-app.use((req,res,next)=>{
-    productos.getAll().then((r)=>(todos=r))
-    next()
-})
-app.get('/productos', (req,res)=>{
-    res.json(todos)
+
+// app.use((req,res,next)=>{
+//     productos.getAll().then((r)=>(todos=r))
+//     next()
+// })
+app.get('/productos', async (req,res)=>{
+    const respuesta = await productos.getAll()
+    console.log(respuesta)
+    res.json(respuesta)
 })
 
 app.get('/productoRandom', (req,res)=>{
