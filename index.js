@@ -89,9 +89,9 @@ class Contenedor {
 const newFile = new Contenedor("./productos.txt")
 
 async function cargarProductos (){
-    await newFile.save({ title: "botin rojo", price: 7000, thumbnail: "" })
-    await newFile.save({ title: "botin azul", price: 10000, thumbnail: "" })
-    await newFile.save({ title: "botin naranja", price: 9000, thumbnail: ""})
+    await newFile.save({ title: "botin rojo", price: 7000, thumbnail: "https://cdn.solodeportes.com.ar/media/catalog/product/cache/baa193a472891718a9656a0f6c3cd266/b/o/botines-de-futbol-adidas-predator-freak-3-fg-roja-100010fy6279001-1.jpg" })
+    await newFile.save({ title: "botin azul", price: 10000, thumbnail: "https://sportotalar.vteximg.com.br/arquivos/ids/216596-400-400/AT7949-414-14028-Azul_1.jpg?v=637371823806770000" })
+    await newFile.save({ title: "botin naranja", price: 9000, thumbnail: "https://i.pinimg.com/originals/b3/bb/37/b3bb37561d8b10fd4e29bd78c67d7c5f.jpg"})
 }
 
 cargarProductos()
