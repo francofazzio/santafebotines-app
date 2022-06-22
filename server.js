@@ -1,6 +1,6 @@
 const express = require(`express`)
 const app = express()
-const rutas = require(`./desafio4/rutas/rutas`)
+const rutas = require(`./rutas/rutas`)
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

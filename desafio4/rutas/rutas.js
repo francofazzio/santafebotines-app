@@ -51,7 +51,7 @@ router.get(`/productos/:id`, (req , res)=>{
 })
 router.post(`/productos`, (req , res )=>{
     const {title , price , thumbnail  } = req.body
-    base.postProduct({title , price, thumbnail}).then(i => res.send({msg:`el id del producto es  ${i}`}))
+    base.postProduct({title , price, thumbnail}).then(i => res.send({msg:`el id del producto agregado es  ${i}`}))
 })
 
 router.delete(`/productos/:id` ,(req , res)=>{
@@ -63,23 +63,6 @@ router.put(`/productos/:id` ,(req , res)=>{
     const id = Number(req.params.id)
     base.putProduct(id).then(r => res.json({msg: `producto con id: ${id} modificado`}))    
 })
-route.post(`/productos`, (req, res) => {
-    try {
-    const { title, price, thumbnail } = req.body;
-    let id;
-    
-    (product.length == 0) ? (id = 1) : (id = product [product.length - 1].id + 1);
-    
-    product.push({ id, title, price, thumbnail });
-    
-    res.json({ id, title, price, thumbnail });
-    
-    
-    } catch (error) {
-    res.json({ error: `Error al postear`});
-    }
-    
-    
-    });
+
 
 module.exports = router
