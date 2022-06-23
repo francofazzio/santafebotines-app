@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./server.js"
   },
   "repository": {
     "type": "git",
@@ -18,11 +18,9 @@
   },
   "homepage": "https://github.com/francofazzio/santafebotines-app#readme",
   "dependencies": {
-    "D": "^1.0.0",
-    "ejs": "^3.1.8",
     "express": "^4.18.1",
     "express-handlebars": "^6.0.6",
-    "nodemon": "^2.0.16",
-    "pug": "^3.0.2"
+    "nodemon": "^2.0.16"
+  
   }
 }

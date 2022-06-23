@@ -1,0 +1,24 @@
+<%- include("./partials/head.ejs")   %>
+<body class="container">
+    <%- include("./partials/header.ejs")   %>
+
+    <h2 class="text-center">Carga tus Productos</h2>
+
+    <form action="/productos" method="post" class="d-flex w-75 m-auto flex-column">
+        <div class="input-group input-group-sm  mb-3 ">
+            <span class="input-group-text" id="inputGroup-sizing-sm">nombre</span>
+            <input required name="title" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <div class="input-group input-group-sm  mb-3 ">
+            <span class="input-group-text" id="inputGroup-sizing-sm">precio</span>
+            <input required name="price" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <div class="input-group input-group-sm  mb-3 ">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Url imagen</span>
+            <input required name="thumbnail" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <button type="submit" class="btn btn-primary w-25 m-auto">Cargar Producto</button>
+    </form>
+    <%- include("./partials/scriptBtps.ejs")   %>
+</body>
+</html>

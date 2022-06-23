@@ -1,0 +1,20 @@
+<h2 class="text-center">Tabla de Productos</h2>
+
+{{#if productExist}}
+    <table class="table table-dark table-striped border rounder">
+        <tr class="thead-dark">
+            <th >Nombre</th>
+            <th >Price</th>
+            <th >Img</th>
+        </tr>
+            {{#each product}}
+            <tr class="table-danger">
+                <td class="table-danger">{{this.title}}</td>
+                <td class="table-danger">{{this.price}}</td>
+                <td class="table-danger"><img style="width: 25px ;" src={{this.thumbnail}} alt=""></td>
+            </tr>
+            {{/each}}
+    </table>
+    {{else}} 
+        <h2 class="text-center">No Hay Productos Cargados</h2>
+{{/if}}
