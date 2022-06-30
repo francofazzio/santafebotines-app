@@ -1,0 +1,32 @@
+[
+	{
+		"title": "Botin Rojo",
+		"price": 4150,
+		"thumbnail": "",
+		"id": 1
+	},
+	{
+		"title": "Botin Amarillo",
+		"price": 7200,
+		"thumbnail": "",
+		"id": 2
+	},
+	{
+		"title": "Botin Verde",
+		"price": 7875,
+		"thumbnail": "",
+		"id": 3
+	},
+	{
+		"title": "Botin Naranja",
+		"price": 4525,
+		"thumbnail": "",
+		"id": 4
+	},
+	{
+		"title": "Botin Rosado",
+		"price": 8500,
+		"thumbnail": "",
+		"id": 5
+	},
+]
