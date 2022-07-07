@@ -2,11 +2,10 @@
   "name": "santafebotines-app",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
-  "type": "module",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon ./src/server.js"
   },
   "repository": {
     "type": "git",
@@ -20,10 +19,9 @@
   },
   "homepage": "https://github.com/francofazzio/santafebotines-app#readme",
   "dependencies": {
-    "dotenv": "^16.0.1",
-    "express": "^4.18.1"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.19"
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6",
+    "nodemon": "^2.0.18",
+    "socket.io": "^4.5.1"
   }
 }
