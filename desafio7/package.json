@@ -1,0 +1,29 @@
+{
+  "name": "santafebotines-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/francofazzio/santafebotines-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/francofazzio/santafebotines-app/issues"
+  },
+  "homepage": "https://github.com/francofazzio/santafebotines-app#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "knex": "^2.1.0",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.19",
+    "socket.io": "^4.5.1",
+    "sqlite3": "^5.0.9"
+  }
+}
