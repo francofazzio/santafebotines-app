@@ -2,7 +2,7 @@ import express from "express"
 import 'dotenv/config'
 import routerProduct from "./routes/routesProduct.mjs"
 import routerCart from "./routes/RoutesCart.mjs"
-const puerto = process.env.PUERTO || 8000
+const puerto = process.env.PUERTO || 8080
 const app = express()
 
 
