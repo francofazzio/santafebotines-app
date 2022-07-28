@@ -1,0 +1,18 @@
+header {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    padding: 1em;
+    background-color: black;
+  }
+  header div {
+    color: aliceblue;
+  }
+  header nav ul {
+    display: inline-flex;
+    margin-bottom: 0rem; 
+  }
+  header nav ul li {
+    padding-inline: 1em;
+    color: aliceblue;
+  }

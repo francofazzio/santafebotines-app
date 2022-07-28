@@ -1,0 +1,32 @@
+
+.sect {
+    background-color: darkseagreen;
+    margin: 1em;
+    border-radius: 1em;
+  }
+  
+  #msgsPool {
+    background-color: white;
+    border-radius: 0.5em;
+    margin: 1em;
+    margin: 0;
+    padding: 1em;
+    min-height: 50vh;
+    max-height: 50vh;
+    overflow: scroll;
+  }
+  #msgsPool .msgsPool-user {
+    font-weight: bold;
+    color: blue;
+  }
+  #msgsPool .msgsPool-date {
+    color: brown;
+  }
+  #msgsPool .msgsPool-msg {
+    font-style: italic;
+    color: green;
+  }
+  
+  #msgForm {
+    padding: 1em;
+  }
