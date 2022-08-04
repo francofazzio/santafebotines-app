@@ -38,7 +38,7 @@ const createTableMensajes = async() => {
             database.databaseConnectionSQL3.destroy()
         }
     }
-    //Mandar llamar la funcion para insertar productos
+   
 const InsertProductos = async(datos) => {
         try {
             await database.databaseConnection('productos').insert(datos)
@@ -49,7 +49,7 @@ const InsertProductos = async(datos) => {
             database.databaseConnection.destroy()
         }
     }
-    //Mandar llamar la funcion para insertar mensajes
+    
 const InsertMensajes = async(datos) => {
     try {
         await database.databaseConnectionSQL3('mensajes').insert(datos)

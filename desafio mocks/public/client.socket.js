@@ -4,7 +4,7 @@ const titleInput = document.querySelector('#title')
 const priceInput = document.querySelector('#price')
 const imgPool = document.querySelector('#thumbnail')
 
-//Datos para mensajeria
+
 const messageForm = document.querySelector('#messageForm')
 const emailInput = document.querySelector('#emailInput')
 const nombreInput = document.querySelector('#nombreInput')
@@ -51,28 +51,24 @@ function sendProductos(productInfo) {
     socket.emit('client:product', productInfo)
 }
 
-//Funciones para mensajeria
+
 function sendMessage(messageInfo) {
     socket.emit('client:menssage', messageInfo)
 }
 
 function renderMessage(messagesInfo) {
-    //se va a desnormalizar
+  
     const author = new normalizr.schema.Entity('author',{},{idAtrribute:'id'})
     const mensaje = new normalizr.schema.Entity('mensaje',{author: author},{idAtrribute:"id"})
     const schemamensajes = new normalizr.schema.Entity('mensajes',{
         mensajes:[mensaje]
     },{idAtrribute:"id"})
     let desnomalize = normalizr.denormalize(messagesInfo.result,schemamensajes,messagesInfo.entities)
-    //console.log(desnomalize)
+    
     let caracteresNomalizados = (JSON.stringify(messagesInfo)?.length)
-    //console.log(caracteresNomalizados)
+   
     let caracteresNormales = (JSON.stringify(desnomalize)?.length)
-    //console.log(caracteresNomalizados)
-    //console.log(caracteresNormales)
-    //console.log(entendimiento)
-    //console.log("desnormalizado",desnomalize)
-    //console.log("normalizado", messagesInfo)
+   
     if(desnomalize !== undefined || messagesInfo.length != 0)
     {
         if(desnomalize !== undefined)

@@ -1,5 +1,5 @@
 const database = require('../src/database')
-    //Mandar llamar la funcion para leer productos
+    
 const ReadProductos = async() => {
         try {
             const camposProductos = ['title', 'price', 'thumbnail']
@@ -11,7 +11,7 @@ const ReadProductos = async() => {
             database.databaseConnection.destroy()
         }
     }
-    //Mandar llamar la funcion para leer Mensajes
+  
 const ReadMensajes = async() => {
     try {
         const camposMensajes = ['email', 'horaenvio', 'message']
