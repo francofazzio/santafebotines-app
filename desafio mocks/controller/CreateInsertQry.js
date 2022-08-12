@@ -1,6 +1,6 @@
 const database = require('../src/database')
 const qryRead = require('./ReadQry')
-    //Creamos la funcion con la estructura para crear la tabla Productos
+   
 const createTable = async() => {
         try {
             await database.databaseConnection.schema.dropTableIfExists('productos')
