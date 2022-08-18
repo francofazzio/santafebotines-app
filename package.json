@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "connect-mongo": "^4.6.0",
-    "faker-js": "^1.0.0",
-    "knex": "^2.2.0",
-    "normalizr": "^3.6.2",
-    "socket.io": "^4.5.1"
-  }
-}
