@@ -1,0 +1,11 @@
+<%- include("./partials/head.ejs")   %>
+<body class="container">
+    <% if (userLog) { %>
+        <%- include("./Productos.ejs") %>         
+    <% } else { %>
+            <%- include("./partials/header.ejs") %>
+            <h1 class="text-center">Bienvenido Inicie sección </h1>
+    <% } %>
+    <%- include("./partials/scriptBtps.ejs")   %>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<%- include("./partials/head.ejs")   %>
+<body class="container">
+    <% if (userLog) { %>
+    <%- include("./partials/headersLog.ejs") %>
+        <img src="<%= e.thumbnail %>" alt="">
+        <div>
+            <h3><%= e.nombre %></h3>
+            <h3><%= e.apellido %></h3>
+            <h3><%= e.email %></h3>
+            <h3><%= e.telefono %></h3>
+        </div>
+    <% } else { %>
+        <%- include("./index.ejs")   %>
+    <% }  %>
+    <%- include("./partials/scriptBtps.ejs")   %>
+</body>
+</html>
