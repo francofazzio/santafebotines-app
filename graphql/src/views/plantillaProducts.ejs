@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Bienvenido <%= email %></h1>
+        <h1><img src="<%=avatar%>" alt="avatar"></h1>
+            <button onclick="location.href='/api/user/logout'">Sing off</button>
+            <button onclick="location.href='/api/carts/usercart'">Go to cart!</button>
+    </div>
+    <div>
+        <h1>Formulario de ingreso de nuevo producto</h1>
+        <form action="/api/products" method="POST">
+            Title: <input name="title" id="title" type="text" placeholder="Ingrese nombre del producto">
+            <br>
+            Description: <input name="description" id="description" type="text" placeholder="Ingrese la descripcion del producto">
+            <br>
+            Code: <input name="code" id="code" type="text" placeholder="Ingrese codigo del producto">
+            <br>
+            Imagen del Producto: <input name="thumbnail" id="thumbnail" type="text" placeholder="Ingrese URL de imagen del producto">
+            <br>
+            Price: <input  name="price" id="price" type="number" placeholder="Ingrese precio en u$S">
+            <br>
+            Stock inicial de carga: <input name="stock" id="stock" type="number" placeholder="Ingrese el stock inicial del producto">
+            <br>
+
+            <input type="submit" value="subir">
+        </form>
+        <br>
+        <div id="productos"></div>
+    </div>
+        <br>
+        <br>
+    <h1>Stock actual</h1>
+    <table>
+        <tr>
+            <th>Title</th><th>Price</th><th>Description</th><th>Image</th><th>Stock</th><th>addCart</th>
+        </tr>
+        <% products.forEach(producto => { %>
+            <tr>
+                <td><%= producto.title %> </td>
+                <td><%= producto.price %> </td>
+                <td><%= producto.description %> </td>
+                <td><img src="<%= producto.thumbnail %>" alt=""> </td>
+                <td><%= producto.stock %> </td>
+                <td><form action="/api/carts/<%=cartId%>/product_id/<%=producto._id%>" method="POST"><input type="submit" value="add to cart"></form></td>
+            </tr>
+        <% }) %>  
+    </table>
+</body>
+</html>

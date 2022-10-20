@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    
+    <form action="/api/user/register" enctype="multipart/form-data" method="POST" >
+        <p>Registro de usuario nuevo</p>
+        <input type="text" name="username" id="username" placeholder="Ingrese su usuario">
+        <input type="text" name="password" id="password" placeholder="Ingrese su password">
+        <input type="text" name="firstName" id="firstName" placeholder="Ingrese su nombre">
+        <input type="text" name="lastName" id="lastName" placeholder="Ingrese su apellido">
+        <input type="text" name="email" id="email" placeholder="Ingrese su email">
+        <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Ingrese su telefono">
+        <input type="file" name="userAvatar" id="userAvatar">
+        <input type="submit" name="submitLogin" id="submitLogin" value="Enviar">        
+    </form>
+    <button onclick="location.href='/api/user/login'">Ir a login</button>
+</body>
+</html>

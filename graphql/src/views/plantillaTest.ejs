@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Stock test</h1>
+    <table>
+        <tr>
+            <th>Title</th><th>Price</th><th>Image</th><th>id</th>
+        </tr>
+        <% randomProductsFaker.forEach(producto => { %>
+            <tr>
+                <td><%= producto.title %> </td>
+                <td><%= producto.price %> </td>
+                <td><img src="<%= producto.thumbnail %>" alt=""> </td>
+                <td><%= producto.id %> </td>
+            </tr>
+        <% }) %>  
+    </table>
+</body>
+</html>
