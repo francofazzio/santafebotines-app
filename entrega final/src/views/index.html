@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./ejs.min.js"></script>
+</head>
+<body>
+    <h1>Chat de usuarios</h1>
+    <div id="messagesPool"></div>
+    <form id="messageForm">
+        <input id="emailInput" type="email" placeholder="Ingrese mail de user">
+        <input id="nameInput" type="text" placeholder="Ingrese nombre de user">
+        <input id="lastNameInput" type="text" placeholder="Ingrese apellido de user">
+        <input id="ageInput" type="text" placeholder="Ingrese edad de user">
+        <input id="aliasInput" type="text" placeholder="Ingrese alias de user">
+        <input id="avatarInput" type="text" placeholder="Ingrese url de avatar de user">
+        <input id="messageInput" type="text" placeholder="Ingrese mensaje">
+        <input type="submit" value="Enviar">
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./client.socket.js"></script>
+</body>
