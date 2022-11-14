@@ -38,6 +38,8 @@ logger.info("PUERTO por ARGS",args.p)
 
 const app = express()
 const PORT = process.env.PORT || args.port
+enviroment.PORT = args.port
+console.log("PORT DESDE SERVER.js", enviroment.PORT)
 const isCluster= args.m == 'cluster'
 
 if(isCluster && cluster.isPrimary) {

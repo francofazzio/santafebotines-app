@@ -5,20 +5,62 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sketchy/bootstrap.min.css" integrity="sha384-RxqHG2ilm4r6aFRpGmBbGTjsqwfqHOKy1ArsMhHusnRO47jcGqpIQqlQK/kmGy9R" crossorigin="anonymous">
 </head>
 <body>
-    
-    <form action="/api/user/register" enctype="multipart/form-data" method="POST" >
-        <p>Registro de usuario nuevo</p>
-        <input type="text" name="username" id="username" placeholder="Ingrese su usuario">
-        <input type="text" name="password" id="password" placeholder="Ingrese su password">
-        <input type="text" name="firstName" id="firstName" placeholder="Ingrese su nombre">
-        <input type="text" name="lastName" id="lastName" placeholder="Ingrese su apellido">
-        <input type="text" name="email" id="email" placeholder="Ingrese su email">
-        <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Ingrese su telefono">
-        <input type="file" name="userAvatar" id="userAvatar">
-        <input type="submit" name="submitLogin" id="submitLogin" value="Enviar">        
-    </form>
-    <button onclick="location.href='/api/user/login'">Ir a login</button>
+    <section class="mh-100" style="background-color: #6e644f; height:1000px">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+              <div class="card" style="border-radius: 1rem;">
+                <div class="row g-0">
+                  <div class="col-md-6 col-lg-5 d-none d-md-block">
+                    <img src="https://i5.walmartimages.com/asr/048eabcd-8b61-4304-aa8a-bceed21b450a.cd1d25cfaa10e75747e8d6a52bde5065.jpeg"
+                      alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                  </div>
+                  <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                    <div class="card-body p-4 p-lg-5 text-black">
+      
+                      <form action="/api/user/register" enctype="multipart/form-data" method="POST">
+                        <h5 class="fw-normal mb-1 pb-1" style="letter-spacing: 1px;">Register new account</h5>
+                        <div>
+                          <input id="form2Example17" class="form-control form-control-lg" type="text" name="username" id="username" placeholder="Ingrese su usuario" />
+                        </div>                      
+                        <div>
+                            <input type="text" id="form2Example27" class="form-control form-control-lg" name="password" id="password" placeholder="Ingrese su password" />
+                        </div>
+                        <div>
+                          <input id="form2Example17" class="form-control form-control-lg" type="text" name="firstName" id="firstName" placeholder="Ingrese su nombre" />
+                        </div>
+                        <div>
+                          <input id="form2Example17" class="form-control form-control-lg" type="text" name="lastName" id="lastName" placeholder="Ingrese su apellido" />
+                        </div>
+                        <div>
+                          <input id="form2Example17" class="form-control form-control-lg" type="text" name="email" id="email" placeholder="Ingrese su email" />
+                        </div>
+                        <div>
+                          <input id="form2Example17" class="form-control form-control-lg" type="text" name="phoneNumber" id="phoneNumber" placeholder="Ingrese su telefono" />
+                        </div>
+                        <div>
+                          <input id="form2Example17" class="form-control form-control-lg" type="file" name="userAvatar" id="userAvatar" />
+                        </div>
+      
+                        <div class="pt-1 mb-4">
+                          <button class="btn btn-dark btn-lg btn-block" type="submit" name="submitLogin" id="submitLogin" value="Enviar">Regist</button>
+                        </div>
+      
+                    </form>
+                    <p class="mb-1 pb-lg-1" style="color: #393f81;">Already regist?
+                        <button class="btn btn-primary" onclick="location.href='/api/user/login'">Ir a login</button>
+                    </p>
+      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 </body>
 </html>

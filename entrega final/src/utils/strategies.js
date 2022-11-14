@@ -1,6 +1,7 @@
 import { Strategy as LocalStrategy } from "passport-local";
 import { User } from '../models/userModel.js'
 import { hashPassword, isValidPassword } from './bcryptPasswords.js'
+import { enviroment } from "../config/config.js";
 
 
 // Estrategia de registro
@@ -21,7 +22,7 @@ const registerStrategy = new LocalStrategy(
                 lastName: req.body.lastName,
                 email: req.body.email,
                 phoneNumber: req.body.phoneNumber ,
-                avatar: `http://localhost:${PORT}/${req.file.filename}`,
+                avatar: `http://localhost:${enviroment.PORT}/${req.file.filename}`,
                 role: 'user'
             }
             const createdUser = await User.create(newUser)
@@ -49,7 +50,6 @@ const registerStrategy = new LocalStrategy(
             if(!user || !isValidPassword(password, user.password)){
                 return done(null, null)
             }
-  
             done(null, user)
             
         } catch (error) {

@@ -4,35 +4,64 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sketchy/bootstrap.min.css" integrity="sha384-RxqHG2ilm4r6aFRpGmBbGTjsqwfqHOKy1ArsMhHusnRO47jcGqpIQqlQK/kmGy9R" crossorigin="anonymous">
     <title>Document</title>
 </head>
 <body>
-    <div>
-        <h1>Bienvenido <%= email %></h1>
-        <h1><img src="<%=avatar%>" alt="avatar"></h1>
-            <button onclick="location.href='/api/user/logout'">Sing off</button>
-            <button onclick="location.href='/api/carts/usercart'">Go to cart!</button>
-    </div>
-    <div>
-        <div id="productos"></div>
-    </div>
-        <br>
-        <br>
-    <h1>Stock actual</h1>
-    <table>
-        <tr>
-            <th>Title</th><th>Price</th><th>Description</th><th>Image</th><th>Stock</th><th>addCart</th>
-        </tr>
-        <% products.forEach(producto => { %>
+    <section class="vh-200" style="background-color: #6e644f;">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <h1>Bienvenido <%= email %></h1>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-primary" onclick="location.href='/api/user/logout'">Sing off</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-primary" onclick="location.href='/api/carts/usercart'">Go to cart!</button>
+                    </li>
+                </ul>
+                </div>
+            </div>
+        </nav>
+        <div>
+            <h1><img src="<%=avatar%>" alt="avatar"></h1>
+        </div>
+        <div>
+                <div id="productos"></div>
+            </div>
+            <h1>Stock actual</h1>
+            <table class="table table-hover">
+        <thead>    
             <tr>
-                <td><%= producto.title %> </td>
-                <td><%= producto.price %> </td>
-                <td><%= producto.description %> </td>
-                <td><img src="<%= producto.thumbnail %>" alt=""> </td>
-                <td><%= producto.stock %> </td>
-                <td><form action="/api/carts/<%=cartId%>/product_id/<%=producto._id%>" method="POST"><input type="submit" value="add to cart"></form></td>
+                <th scope="col">Title</th>
+                <th scope="col">Price</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+                <th scope="col">Stock</th>
+                <th scope="col">add Cart</th>
             </tr>
-        <% }) %>  
-    </table>
+        </thead>
+        <tbody>
+            <% products.forEach(producto => { %>
+                <tr class="table-primary">
+                    <td><%= producto.title %> </td>
+                    <td><%= producto.price %> </td>
+                    <td><%= producto.description %> </td>
+                    <td><img src="<%= producto.thumbnail %>" alt=""> </td>
+                    <td><%= producto.stock %> </td>
+                    <td><form action="/api/carts/<%=cartId%>/product_id/<%=producto._id%>" method="POST"><input type="submit" class="btn btn-primary" value="add to cart"></form></td>
+                </tr>
+                <% }) %>  
+            </tbody>
+        </table>
+    </section>
+    </body>
+</html>
 </body>
 </html>

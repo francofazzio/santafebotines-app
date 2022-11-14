@@ -5,15 +5,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sketchy/bootstrap.min.css" integrity="sha384-RxqHG2ilm4r6aFRpGmBbGTjsqwfqHOKy1ArsMhHusnRO47jcGqpIQqlQK/kmGy9R" crossorigin="anonymous">
 </head>
 <body>
+
+    <section class="mh-100" style="background-color: #6e644f; height:1000px">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+              <div class="card" style="border-radius: 1rem;">
+                <div class="row g-0">
+                  <div class="col-md-6 col-lg-5 d-none d-md-block">
+                    <img src="https://i.pinimg.com/originals/95/0c/10/950c10f03dc513559c06c5f2c82478f7.png"
+                      alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                  </div>
+                  <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                    <div class="card-body p-4 p-lg-5 text-black">
+      
+                      <form action="/api/user/login" method="POST">
+      
+                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+      
+                        <div class="form-outline mb-4">
+                          <input id="form2Example17" class="form-control form-control-lg" type="text" name="username" id="username" placeholder="Ingrese su username" />
+                        </div>
+      
+                        <div class="form-outline mb-4">
+                          <input type="password" id="form2Example27" class="form-control form-control-lg" name="password" id="password" placeholder="Ingrese su password" />
+                        </div>
+      
+                        <div class="pt-1 mb-4">
+                          <button class="btn btn-dark btn-lg btn-block" type="submit" name="submitLogin" id="submitLogin" value="Enviar">Login</button>
+                        </div>
+      
+                    </form>
+                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account?
+                        <button class="btn btn-primary" onclick="location.href='/api/user/register'">Ir a registro</button>
+                    </p>
+      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     
-    <form action="/api/user/login" method="POST" >
-        <p>Ingrese su Usuario</p>
-        <input type="text" name="username" id="username" placeholder="Ingrese su username">
-        <input type="text" name="password" id="password" placeholder="Ingrese su password">
-        <input type="submit" name="submitLogin" id="submitLogin" value="Enviar">        
-    </form>
-    <button onclick="location.href='/api/user/register'">Ir a registro</button>
+    
 </body>
 </html>

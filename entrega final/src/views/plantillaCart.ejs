@@ -4,26 +4,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sketchy/bootstrap.min.css" integrity="sha384-RxqHG2ilm4r6aFRpGmBbGTjsqwfqHOKy1ArsMhHusnRO47jcGqpIQqlQK/kmGy9R" crossorigin="anonymous">
     <title>Document</title>
 </head>
 <body>
-    <h1>Tu carrito :)</h1>
-    <table>
-        <tr>
-            <th>Title</th><th>Image</th><th>Price</th><th>Cant</th><th>total</th><th>Delete Product</th>
-        </tr>
-        <% productsInCart.forEach(producto => { %>
+    <section class="mh-600" style="background-color: #6e644f; height:1000px">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav me-auto">
+                    <button class="btn btn-primary" onclick="location.href='/api/products/all'">Volver a la tienda</button>
+                    <form action="/api/carts/purchase" method="POST">
+                        <input class="btn btn-primary" type="submit" name="purchase" id="purchase" value="Finalizar Compra">
+                    </form>
+                </ul>
+                </div>
+            </div>
+        </nav>
+        <div>
+                <div id="productos"></div>
+            </div>
+            <h1>Tu carrito :)</h1>
+            <table class="table table-hover">
+        <thead>    
             <tr>
-                <td><%= producto.title %> </td>
+                <th scope="col">Title</th>
+                <th scope="col">Price</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+                <th scope="col">Stock</th>
+                <th scope="col">add Cart</th>
+                <th scope="col">delete Product</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% productsInCart.forEach(producto => { %>
+                <tr class="table-primary">
+                    <td><%= producto.title %> </td>
                 <td><img src="<%= producto.thumbnail %>" alt=""> </td>
                 <td>U$S <%= producto.price %> </td>
                 <td><%= producto.quantity %> </td>
                 <td>U$S <%= (producto.total) %> </td>
                 <td><form action="/api/carts/delete/<%=producto.productId%>" method="POST"><input type="submit" value="Delete Product"></form></td>
-            </tr>
-        <% }) %>  
-    </table>
-    <button onclick="location.href='/api/products/all'">Volver a la tienda</button>
-    <form action="/api/carts/purchase" method="POST"> <input type="submit" name="purchase" id="purchase" value="Finalizar Compra"></form>
+                </tr>
+                <% }) %>  
+            </tbody>
+        </table>
+    </section>
 </body>
 </html>

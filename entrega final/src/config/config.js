@@ -11,5 +11,6 @@ export const enviroment = {
     AUTHTOKEN_TWILIO: process.env.AUTHTOKEN_TWILIO || '',
     ADMIN_WHATSAPP_NUMBER: process.env.ADMIN_WHATSAPP_NUMBER || '',
     ADMIN_SMS_NUMBER: process.env.ADMIN_SMS_NUMBER || '',
-    TWILIO_WHATSAPP_SANDBOX: process.env.TWILIO_WHATSAPP_SANDBOX || ''
+    TWILIO_WHATSAPP_SANDBOX: process.env.TWILIO_WHATSAPP_SANDBOX || '',
+    PORT: process.env.PORT || ''
 }
