@@ -12,7 +12,7 @@ import MongoStore from 'connect-mongo';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from "passport-local";
 import { User } from './models/userModel.js';
-// import { registerStrategy, loginStrategy } from './utils/strategies.js';
+
 import mongoose from 'mongoose';
 import { hashPassword, isValidPassword } from './utils/bcryptPasswords.js'
 import { enviroment } from './config/config.js';
@@ -50,7 +50,7 @@ if(isCluster && cluster.isPrimary) {
   })
 } else {
   
-  //conexion a mongoAtlas
+
   await mongoose.connect(enviroment.STRING_CONNECTION_MONGO).then(console.log("Conectado a la base Mongo"))
   
   const expressServer = app.listen(PORT, () => console.log(`Servidor escuchando en el puerto ${PORT}`))
@@ -66,7 +66,7 @@ if(isCluster && cluster.isPrimary) {
   app.set('views', path.join(__dirname, './views'))
   app.set('view engine', 'ejs')
   
-  //Configuracion session
+
   const mongoOptions = { useNewUrlParser: true, useUnifiedTopology: true };
   app.use(cookieParser());
   app.use(
@@ -89,18 +89,17 @@ if(isCluster && cluster.isPrimary) {
   )
   
   
-  //middleware de aplicacion passport
+  
   app.use(passport.initialize());
   app.use(passport.session());
 
-    //middleware de aplicacion para pasar los args en el req
+   
     app.use((req, res, next) => {
       req.args = args
       next()
     })
   
-  //------------------------------------------------
-  // Estrategia de registro
+
   const registerStrategy = new LocalStrategy(
     { passReqToCallback: true },
     async (req, username, password, done) => {
@@ -130,7 +129,7 @@ if(isCluster && cluster.isPrimary) {
     }
   )
   
-  // Estrategia de logeo
+  
   const loginStrategy = new LocalStrategy(
     async (username, password, done) => {
         try {
@@ -147,7 +146,7 @@ if(isCluster && cluster.isPrimary) {
         }
     }
   )
-  //------------------------------------------------
+  
   
   passport.use("register", registerStrategy);
   passport.use("login", loginStrategy);
@@ -160,29 +159,21 @@ if(isCluster && cluster.isPrimary) {
     User.findById(id, done);
   });
   
-  //Aca vienen las interacciones de io: servidor<-->cliente
+  
   io.on('connection', async socket =>  {
       console.log(`Se conecto el cliente con id: ${socket.id}`)
-      // socket.emit('server:products', await contenedor.getAll())
-  
-      //recibo los mensajes de la base altasMongo y los guardo en una variable, normalizo y envio al socket
+      
       const messagesFromMongo = await chatDAO.getAll()
       const normalizedChat = normalizedMessages(messagesFromMongo)
   
-      //Envio mensajes normalizados al front
+     
       socket.emit('server:mensajes', normalizedChat)
   
-      //Evento de carga de nuevo producto
-      // socket.on('client:newProduct', async (newProductInfo) => {
-      //     await contenedor.postProduct(newProductInfo)
-      //     io.emit('server:products', await contenedor.getAll())
-      // })
-      
-      //Evento de nuevo mensaje
+  
       socket.on('client:message', async (messageInfo) => {
           await chatDAO.postMessage(messageInfo)
   
-          //recibo los mensajes de la base altasMongo y los guardo en una variable, normalizo y envio al socket
+         
           const messagesFromMongo = await chatDAO.getAll()
           const normalizedChat = normalizedMessages(messagesFromMongo)
           io.emit('server:mensajes', normalizedChat)

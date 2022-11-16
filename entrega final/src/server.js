@@ -52,28 +52,28 @@ if(isCluster && cluster.isPrimary) {
   })
 } else {
   
-  //conexion a mongoAtlas
+ 
   const bbdd = await mongoose.connect(enviroment.STRING_CONNECTION_MONGO).then(logger.info("Conectado a la base Mongo"))
   args.bbddName = bbdd.connections[0].name
   
-  //app escuchando en puerto PORT
+ 
   const expressServer = app.listen(PORT, () => logger.info(`Servidor escuchando en el puerto ${PORT}`))
   args.expressServer = expressServer
   
-  //confiuracion para poder usar el __dirname y el path en module
+  
   const __dirname = dirname(fileURLToPath(import.meta.url))
   app.use(express.static(path.join(__dirname,'./views')))
   app.use(express.static("upload"))
   
-  //config para poder usar json
+
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
   
-  //config de views
+  
   app.set('views', path.join(__dirname, './views'))
   app.set('view engine', 'ejs')
   
-  //Configuracion session
+ 
   const mongoOptions = { useNewUrlParser: true, useUnifiedTopology: true };
   app.use(cookieParser());
   app.use(
@@ -95,7 +95,7 @@ if(isCluster && cluster.isPrimary) {
     })
   )
 
-  //middleware de aplicacion passport
+  
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(compression())
@@ -111,31 +111,31 @@ if(isCluster && cluster.isPrimary) {
     User.findById(id, done);
   });
 
-  //middleware de aplicacion para pasar los args en el req
+
   app.use((req, res, next) => {
     req.args = args
     next()
   })
   
-  //inicializacion de server io
+
   const io = new Server(expressServer)
   
-  //interacciones de io: servidor<-->cliente
+ 
   io.on('connection', async socket =>  {
     console.log(`Se conecto el cliente con id: ${socket.id}`)
 
-    //recibo los mensajes de la base altasMongo
+
     const messagesFromMongo = await chatDAO.getAll()
     const normalizedChat = normalizedMessages(messagesFromMongo)
 
-    //Envio mensajes normalizados al front
+    
     socket.emit('server:mensajes', normalizedChat)
 
     //Evento de nuevo mensaje
     socket.on('client:message', async (messageInfo) => {
         await chatDAO.postMessage(messageInfo)
 
-        //recibo los mensajes de la base altasMongo
+        
         const messagesFromMongo = await chatDAO.getAll()
         const normalizedChat = normalizedMessages(messagesFromMongo)
         io.emit('server:mensajes', normalizedChat)

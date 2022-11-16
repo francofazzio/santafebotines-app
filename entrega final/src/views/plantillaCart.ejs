@@ -8,13 +8,13 @@
     <title>Document</title>
 </head>
 <body>
-    <section class="mh-600" style="background-color: #6e644f; height:1000px">
+    <section class="mh-600" style="background-color: #6e644f; height:1000px; padding: 20px;">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarColor02">
+                <div class="collapse navbar-collapse" id="navbarColor02" style="display: flex; justify-content: end; align-items: center;">
                 <ul class="navbar-nav me-auto">
                     <button class="btn btn-primary" onclick="location.href='/api/products/all'">Volver a la tienda</button>
                     <form action="/api/carts/purchase" method="POST">
@@ -25,32 +25,31 @@
             </div>
         </nav>
         <div>
-                <div id="productos"></div>
-            </div>
-            <h1>Tu carrito :)</h1>
-            <table class="table table-hover">
-        <thead>    
-            <tr>
-                <th scope="col">Title</th>
-                <th scope="col">Price</th>
-                <th scope="col">Description</th>
-                <th scope="col">Image</th>
-                <th scope="col">Stock</th>
-                <th scope="col">add Cart</th>
-                <th scope="col">delete Product</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% productsInCart.forEach(producto => { %>
+           <div id="productos"></div>
+        </div>
+        <h1>Tu carrito :)</h1>
+        <table class="table table-hover">
+            <thead>    
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">delete Product</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% productsInCart.forEach(producto => { %>
                 <tr class="table-primary">
                     <td><%= producto.title %> </td>
-                <td><img src="<%= producto.thumbnail %>" alt=""> </td>
-                <td>U$S <%= producto.price %> </td>
-                <td><%= producto.quantity %> </td>
-                <td>U$S <%= (producto.total) %> </td>
-                <td><form action="/api/carts/delete/<%=producto.productId%>" method="POST"><input type="submit" value="Delete Product"></form></td>
+                    <td><img src="<%= producto.thumbnail %>" alt=""> </td>
+                    <td>U$S <%= producto.price %> </td>
+                    <td><%= producto.quantity %> </td>
+                    <td>U$S <%= (producto.total) %> </td>
+                    <td><form action="/api/carts/delete/<%=producto.productId%>" method="POST"><input type="submit" value="Delete Product"></form></td>
                 </tr>
-                <% }) %>  
+                    <% }) %>  
             </tbody>
         </table>
     </section>

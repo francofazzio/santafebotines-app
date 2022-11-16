@@ -4,7 +4,7 @@ import { hashPassword, isValidPassword } from './bcryptPasswords.js'
 import { enviroment } from "../config/config.js";
 
 
-// Estrategia de registro
+
 const registerStrategy = new LocalStrategy(
     { passReqToCallback: true },
     async (req, username, password, done) => {
@@ -42,7 +42,7 @@ const registerStrategy = new LocalStrategy(
     }
   )
   
-  // Estrategia de logeo
+ 
   const loginStrategy = new LocalStrategy(
     async (username, password, done) => {
         try {

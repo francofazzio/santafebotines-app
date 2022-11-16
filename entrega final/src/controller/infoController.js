@@ -4,7 +4,6 @@ const infoController = async(req, res) => {
     const { args } = req
     const info = {
       puerto: args.port,
-      
       plataforma: process.platform,
       versionNode: process.version,
       memoriaTotalReservada: process.memoryUsage().rss,
@@ -14,7 +13,6 @@ const infoController = async(req, res) => {
       cantCpus: os.cpus().length,
       bbddName: `MongoDB: ${args.bbddName}`
     }
-   
     res.render('plantillaInfo.ejs', { info })
 }
 

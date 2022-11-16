@@ -13,7 +13,7 @@ class ChatDAO extends BaseRepository {
         return allMessages
     }
 
-    //metodo sujeto a revision
+ 
     async postMessage(message) {
         const doc = await Chat.insertMany(message)
     }
